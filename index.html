@@ -1,0 +1,479 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>прикол</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      background-color: #fefefe;
+      color: #1a1a2e;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-rows: auto auto auto auto auto;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #eaeef2;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .company-name {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2c3e66, #1a4c7a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      transition: transform 0.2s ease;
+    }
+
+    .company-name:hover {
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e66;
+      transition: all 0.25s ease;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: #1e88e5;
+      border-bottom-color: #1e88e5;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      background: linear-gradient(125deg, #eef2f9 0%, #d9e2ef 100%);
+      padding: 5rem 2rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #0a2b44;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #2c3e66;
+      margin-bottom: 2rem;
+      opacity: 0.85;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: #1e4a76;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-btn:hover {
+      background: #0f3b5c;
+      transform: translateY(-4px);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .products-section {
+      padding: 4rem 2rem;
+      background: #ffffff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a2b44;
+      margin-bottom: 3rem;
+    }
+
+    .cards-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #edf2f7;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .card-img {
+      transform: scale(1.02);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #1f3b4c;
+    }
+
+    .card-desc {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .card-price {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #1e4a76;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-btn {
+      background: transparent;
+      border: 2px solid #1e4a76;
+      color: #1e4a76;
+      padding: 0.7rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      width: fit-content;
+      font-size: 0.95rem;
+    }
+
+    .card-btn:hover {
+      background: #1e4a76;
+      color: white;
+      transform: scale(0.97);
+      box-shadow: 0 5px 12px rgba(30, 74, 118, 0.3);
+    }
+
+    .info-block {
+      background: #f8fafd;
+      padding: 4rem 2rem;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .info-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+      justify-content: space-between;
+    }
+
+    .info-text {
+      flex: 2;
+      min-width: 250px;
+    }
+
+    .info-text h3 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #0a2b44;
+      margin-bottom: 1rem;
+    }
+
+    .info-text p {
+      font-size: 1.05rem;
+      color: #2d3e50;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .info-highlight {
+      background: #e2edf7;
+      padding: 1rem;
+      border-radius: 24px;
+      font-weight: 500;
+      overflow-wrap: break-word;
+    }
+
+    .info-icon {
+      flex: 1;
+      text-align: center;
+      font-size: 5rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 60px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .info-icon:hover {
+      transform: rotate(6deg) scale(1.02);
+    }
+
+    .footer {
+      background: #0a1c2a;
+      color: #cddfe7;
+      text-align: center;
+      padding: 2rem;
+      font-size: 1rem;
+    }
+
+    .footer .company-footer {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(120deg, #c0e0ff, #ffffff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .footer p {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0.8rem 1.2rem;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding: 3rem 1rem;
+      }
+
+      .products-section {
+        padding: 2rem 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .cards-grid {
+        gap: 1.5rem;
+      }
+
+      .info-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-text h3 {
+        font-size: 1.6rem;
+      }
+
+      .info-icon {
+        order: -1;
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .company-name {
+        font-size: 1.4rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-btn {
+        padding: 0.7rem 1.6rem;
+        font-size: 1rem;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    a, button, .product-card, .hero-btn, .card-btn, .nav-links a {
+      transition: all 0.25s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header class="header">
+      <div class="nav-container">
+        <div class="company-name">прикол</div>
+        <nav aria-label="Главное меню">
+          <ul class="nav-links">
+            <li><a href="#">главная</a></li>
+            <li><a href="#">каталог</a></li>
+            <li><a href="#">контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>ну мы тут чота продаем</h1>
+        <p>купите пожажа</p>
+        <a href="#" class="hero-btn">узнать больше →</a>
+      </div>
+    </section>
+    <section class="products-section" aria-labelledby="products-heading">
+      <h2 id="products-heading" class="section-title">чота</h2>
+      <div class="cards-grid">
+        <article class="product-card">
+          <img class="card-img" src="https://i.pinimg.com/736x/5b/bb/b4/5bbbb40141f702b9e1935e1fda79596a.jpg" alt="ааа" loading="lazy">
+          <div class="card-content">
+            <h3 class="card-title">штука</h3>
+            <p class="card-desc">прикольная</p>
+            <div class="card-price">67 ₽</div>
+            <button class="card-btn">в корозину</button>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="card-img" src="https://i.pinimg.com/736x/5b/bb/b4/5bbbb40141f702b9e1935e1fda79596a.jpg" alt="ааа" loading="lazy">
+          <div class="card-content">
+            <h3 class="card-title">штука</h3>
+            <p class="card-desc">забавная</p>
+            <div class="card-price">228 ₽</div>
+            <button class="card-btn">в корзину</button>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="card-img" src="https://i.pinimg.com/736x/5b/bb/b4/5bbbb40141f702b9e1935e1fda79596a.jpg" alt="ааа" loading="lazy">
+          <div class="card-content">
+            <h3 class="card-title">ноутбук NeoBook Ultra</h3>
+            <p class="card-desc">процессор Intel Core i7, 16GB RAM, SSD 1TB, экран 14" 4K.</p>
+            <div class="card-price">много ₽</div>
+            <button class="card-btn">подробнее</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="info-block">
+      <div class="info-container">
+        <div class="info-text">
+          <h3>почему надо покупать чота у нас</h3>
+          <p>гарантия качества<br>
+          быстрая доставка<br>
+          24/7 поддержка<br>
+          </p>
+          <div class="info-highlight">
+             более 10 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 довольных клиентов уже с нами. присоединяйтесь!
+          </div>
+        </div>
+        <div class="info-icon">
+          :3
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="company-footer">прикол</div>
+      <p>© 2026 прикол — продаем чота</p>
+    </footer>
+  </div>
+</body>
+</html>
+```
